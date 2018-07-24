@@ -1,1 +1,56 @@
-Hello world
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Otterburn Weekend</title>
+
+    <!-- Remember to insert your own API key in the URL below -->
+
+    <script type="text/javascript" src="http://openspace.ordnancesurvey.co.uk/osmapapi/openspace.js?key=BA08531D8339984EE0405F0AC86026A9"></script>  
+
+      <style>
+  html, body, #map { height: 100%; margin: 0;}
+      </style>
+
+  </head>  
+
+  <body onload="init()">
+    <div id="map"></div>
+    <script>
+function init()
+{
+
+  var options = {resolutions: [10, 5]};
+  osMap = new OpenSpace.Map('map', options);
+  osMap.setCenter(new OpenSpace.MapPoint(383980, 610923), 7);
+
+  var lgpx = new OpenLayers.Layer.GML("gpx", "./data/FridayGPX.gpx", {
+    format: OpenLayers.Format.GPX,
+    style: {strokeColor: "blue", strokeWidth: 3, strokeOpacity: 1},
+    projection: new OpenLayers.Projection("EPSG:4326")
+  });
+
+  osMap.addLayer(lgpx);
+
+
+  var lgpx = new OpenLayers.Layer.GML("gpx", "./data/SaturdayGPX.gpx", {
+    format: OpenLayers.Format.GPX,
+    style: {strokeColor: "red", strokeWidth: 3, strokeOpacity: 1},
+    projection: new OpenLayers.Projection("EPSG:4326")
+  });
+
+  osMap.addLayer(lgpx);
+
+  var lgpx = new OpenLayers.Layer.GML("gpx", "./data/SundayGPX.gpx", {
+    format: OpenLayers.Format.GPX,
+    style: {strokeColor: "orange", strokeWidth: 3, strokeOpacity: 1},
+    projection: new OpenLayers.Projection("EPSG:4326")
+  });
+
+  osMap.addLayer(lgpx);
+}
+
+    </script>
+
+  </body>
+</html>
